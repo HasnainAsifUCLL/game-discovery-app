@@ -20,7 +20,7 @@ export function GameCard({ game, onPress }: GameCardProps) {
         </Text>
         <Text>{game.description}</Text>
         <Text size="sm" color="#6B7280">
-          PEGI {game.pegi} · ca. {game.playtimeHours} uur
+          PEGI {game.pegi} · approx. {game.playtimeHours} hours
         </Text>
       </View>
     </Card>

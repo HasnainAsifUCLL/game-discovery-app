@@ -3,6 +3,10 @@ import { Game } from '../types/game';
 import { supabase } from './supabaseClient';
 
 export async function getDiscoverGames(): Promise<Game[]> {
+
+    if (supabase === undefined) {
+      return [];
+    }
   const { data, error } = await supabase
     .from('games')
     .select('id, title, pegi, description, playtime_hours, genres, platforms')
