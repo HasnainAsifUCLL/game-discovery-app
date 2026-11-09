@@ -1,7 +1,7 @@
 {
   "name": "Game Discovery",
   "short_name": "GameDiscover",
-  "description": "Discover games you'll love. Connect with people who love them too.",
+  "description": "Discover games you'll love. Discover games that fit your taste and your free time.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
