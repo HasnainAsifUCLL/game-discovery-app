@@ -1,14 +1,18 @@
 import { useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Stack, useRouter } from 'expo-router';
+import { Stack as RouterStack, useRouter } from 'expo-router';
 import { Screen } from '../../src/components/primitives/Screen';
+import { Stack } from '../../src/components/primitives/Stack';
+import { Row } from '../../src/components/primitives/Row';
 import { Text } from '../../src/components/primitives/Text';
+import { Badge } from '../../src/components/primitives/Badge';
 import { EmptyState } from '../../src/components/primitives/EmptyState';
 import { StyledButton } from '../../src/components/StyledButton';
 import { GameCard } from '../../src/components/GameCard';
 import { getDiscoverGames } from '../../src/services/gameService';
 import { Game } from '../../src/types/game';
 import { checkDatabase } from '../../src/services/databaseService';
+import { colors } from '../../src/theme';
 
 export default function DiscoverScreen() {
   const router = useRouter();
@@ -39,14 +43,20 @@ export default function DiscoverScreen() {
 
   return (
     <Screen padding="lg">
-    <Stack.Screen options={{ title: 'Discover' }} />
-      <View style={styles.container}>
-        <Text size="xl" weight="bold">
-          Discover
-        </Text>
-        <Text size="sm" color="#6B7280">
-          Database: {dbStatus}
-        </Text>
+      <RouterStack.Screen options={{ title: 'Discover' }} />
+      <Stack gap="md">
+        <Stack>
+          <Text size="sm" weight="bold" color={colors.purple}>
+            YOUR DAILY PICKS
+          </Text>
+          <Text size="xl" weight="bold">
+            Find something fun.
+          </Text>
+        </Stack>
+        <Badge
+          label={`Database: ${dbStatus}`}
+          variant={dbStatus === 'online' ? 'success' : dbStatus === 'offline' ? 'error' : 'default'}
+        />
 
         {game === undefined ? (
           <EmptyState
@@ -56,11 +66,15 @@ export default function DiscoverScreen() {
         ) : (
           <>
             <GameCard game={game} />
-            <View style={styles.buttons}>
-              <StyledButton label="Skip" variant="secondary" onPress={nextGame} />
+            <Row gap="md">
+              <View style={styles.flex}>
+                <StyledButton label="Skip" variant="secondary" onPress={nextGame} />
+              </View>
               {/* Later: save the game to My Games */}
-              <StyledButton label="Like" onPress={nextGame} />
-            </View>
+              <View style={styles.flex}>
+                <StyledButton label="Like" onPress={nextGame} />
+              </View>
+            </Row>
           </>
         )}
 
@@ -69,12 +83,11 @@ export default function DiscoverScreen() {
           variant="secondary"
           onPress={() => router.push('/my-games')}
         />
-      </View>
+      </Stack>
     </Screen>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { gap: 16, padding: 16 },
-  buttons: { flexDirection: 'row', justifyContent: 'space-between', gap: 12 },
+  flex: { flex: 1 },
 });

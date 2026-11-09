@@ -1,6 +1,7 @@
 import { Pressable, StyleSheet } from 'react-native';
 import { Spinner } from './primitives/Spinner';
 import { Text } from './primitives/Text';
+import { colors } from '../theme';
 
 interface StyledButtonProps {
   label: string;
@@ -24,14 +25,20 @@ export function StyledButton({
       style={[styles.base, styles[variant], isLoading && styles.disabled]}
       testID={testID}
     >
-      {isLoading ? <Spinner size="small" /> : <Text weight="medium">{label}</Text>}
+      {isLoading ? <Spinner size="small" /> : <Text weight="bold" color={variant === 'primary' ? '#FFFFFF' : colors.ink}>{label}</Text>}
     </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
-  base: { alignItems: 'center', justifyContent: 'center' },
-  primary: {},
-  secondary: {},
+  base: {
+    minHeight: 52,
+    borderRadius: 16,
+    paddingHorizontal: 17,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  primary: { backgroundColor: colors.purple },
+  secondary: { backgroundColor: colors.surface, borderWidth: 1, borderColor: colors.line },
   disabled: {},
 });

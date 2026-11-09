@@ -1,5 +1,6 @@
 import { View, StyleSheet } from 'react-native';
 import { Text } from './Text';
+import { colors } from '../../theme';
 
 interface BadgeProps {
   label: string;
@@ -9,7 +10,7 @@ interface BadgeProps {
 export function Badge({ label, variant = 'default' }: BadgeProps) {
   return (
     <View style={[styles.base, styles[variant]]}>
-      <Text size="sm">{label}</Text>
+      <Text size="sm" weight="bold" color={colors.ink}>{label}</Text>
     </View>
   );
 }
@@ -22,13 +23,13 @@ const styles = StyleSheet.create({
     borderRadius: 999,
   },
   default: {
-    backgroundColor: '#e5e7eb',
+    backgroundColor: colors.purpleSoft,
   },
   success: {
-    backgroundColor: '#d1fae5',
+    backgroundColor: colors.mint,
   },
   warning: {
-    backgroundColor: '#fef3c7',
+    backgroundColor: colors.pegi,
   },
   error: {
     backgroundColor: '#fee2e2',

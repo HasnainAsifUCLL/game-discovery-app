@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Stack } from 'expo-router';
+import { Stack as RouterStack } from 'expo-router';
 import { Screen } from '../../src/components/primitives/Screen';
+import { Stack } from '../../src/components/primitives/Stack';
 import { Text } from '../../src/components/primitives/Text';
 import { EmptyState } from '../../src/components/primitives/EmptyState';
 import { GameCard } from '../../src/components/GameCard';
 import { getMyGames } from '../../src/services/gameService';
 import { Game } from '../../src/types/game';
+import { colors } from '../../src/theme';
 
 export default function MyGamesScreen() {
   const [games, setGames] = useState<Game[]>([]);
@@ -21,11 +22,16 @@ export default function MyGamesScreen() {
 
   return (
     <Screen padding="lg">
-      <Stack.Screen options={{ title: 'My Games' }} />
-      <View style={styles.container}>
-        <Text size="xl" weight="bold">
-          My Games
-        </Text>
+      <RouterStack.Screen options={{ title: 'My Games' }} />
+      <Stack gap="md">
+        <Stack>
+          <Text size="sm" weight="bold" color={colors.purple}>
+            YOUR COLLECTION
+          </Text>
+          <Text size="xl" weight="bold">
+            Games for every mood.
+          </Text>
+        </Stack>
 
         {games.length === 0 ? (
           <EmptyState
@@ -35,11 +41,7 @@ export default function MyGamesScreen() {
         ) : (
           games.map((game) => <GameCard key={game.id} game={game} />)
         )}
-      </View>
+      </Stack>
     </Screen>
   );
 }
-
-const styles = StyleSheet.create({
-  container: { gap: 16, padding: 16 },
-});

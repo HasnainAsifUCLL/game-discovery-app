@@ -1,9 +1,18 @@
 import { Stack } from 'expo-router';
+import { colors } from '../../src/theme';
 
 export default function AppLayout() {
   // Uncomment when you implement Supabase authentication:
   // const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   // if (!isAuthenticated) return <Redirect href="/login" />;
 
-  return <Stack />;
+  return (
+    <Stack
+      screenOptions={{
+        headerStyle: { backgroundColor: colors.cream },
+        headerShadowVisible: false,
+        headerTintColor: colors.ink,
+      }}
+    />
+  );
 }

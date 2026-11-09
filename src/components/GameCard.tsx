@@ -1,7 +1,10 @@
-import { View, StyleSheet } from 'react-native';
 import { Card } from './primitives/Card';
 import { Text } from './primitives/Text';
+import { Badge } from './primitives/Badge';
+import { Row } from './primitives/Row';
+import { Stack } from './primitives/Stack';
 import { Game } from '../types/game';
+import { colors } from '../theme';
 
 interface GameCardProps {
   game: Game;
@@ -11,29 +14,21 @@ interface GameCardProps {
 export function GameCard({ game, onPress }: GameCardProps) {
   return (
     <Card onPress={onPress}>
-      <View style={styles.card}>
+      <Stack gap="md">
+        <Row gap="sm" wrap>
+          {game.genres.map((genre) => (
+            <Badge key={genre} label={genre} />
+          ))}
+        </Row>
         <Text size="xl" weight="bold">
           {game.title}
         </Text>
-        <Text size="sm" color="#6B7280">
-          {game.genres.join(' · ')}
-        </Text>
-        <Text>{game.description}</Text>
-        <Text size="sm" color="#6B7280">
-          PEGI {game.pegi} · approx. {game.playtimeHours} hours
-        </Text>
-      </View>
+        <Text color={colors.muted}>{game.description}</Text>
+        <Row gap="sm" wrap>
+          <Badge label={`PEGI ${game.pegi}`} variant="warning" />
+          <Badge label={`${game.playtimeHours} hours`} variant="success" />
+        </Row>
+      </Stack>
     </Card>
   );
 }
-
-const styles = StyleSheet.create({
-  card: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 16,
-    padding: 20,
-    gap: 8,
-    borderWidth: 1,
-    borderColor: '#E5E7EB',
-  },
-});
