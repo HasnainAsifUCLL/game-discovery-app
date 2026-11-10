@@ -28,6 +28,7 @@ personal and more fun.
 
 - [x] Discover screen: one game at a time, with Skip and Like buttons
 - [x] My Games screen: list of games
+- [ ] Make Like and Skip work properly: Like saves the game to My Games, Skip hides it from Discover
 - [ ] Swipe on Discover: right to show interest, left to skip a game
 - [ ] More information per game: screenshots, gameplay, genre, platform, PEGI rating, playtime
 - [ ] My Games collection: favourites, want to play, playing now, finished
