@@ -1,11 +1,10 @@
-import { Platform, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Tabs } from 'expo-router';
 import { TabIcon } from '../../src/components/TabIcon';
 import { colors } from '../../src/theme';
 
-// Floating dock. On the web, Netlify's free plan shows a "Powered by Netlify" badge in the
-// bottom right corner, so the dock floats a bit higher there to stay clear of it.
-const dockBottom = Platform.OS === 'web' ? 64 : 12;
+// Floating dock: a rounded tab bar that floats a little above the bottom edge.
+const dockBottom = 12;
 
 export default function AppLayout() {
   // Uncomment when you implement Supabase authentication:
