@@ -69,8 +69,8 @@ Screens:
 
 | Route | File | Description |
 |-------|------|-------------|
-| `/` | `app/(app)/index.tsx` | Discover: one game card (genre, description, PEGI, playtime) with Skip / Like buttons and the database status |
-| `/my-games` | `app/(app)/my-games.tsx` | My Games: list of games |
+| `/` | `app/(app)/index.tsx` | Discover: one game card (genre, description, PEGI, playtime) with Skip / Like buttons and the database status. Like adds the game to My Games |
+| `/my-games` | `app/(app)/my-games.tsx` | My Games: the games you liked on Discover |
 
 Both screens are reachable through the tab bar at the bottom.
 
@@ -181,8 +181,8 @@ public/               # PWA files (manifest, service worker, icons)
 ## Roadmap
 
 - [x] Discover screen: one game at a time, with Skip and Like buttons
-- [x] My Games screen: list of games
-- [ ] Make Like and Skip work properly: Like saves the game to My Games, Skip hides it from Discover
+- [x] My Games screen: the games you liked
+- [x] Like and Skip work: Like adds the game to My Games, Skip moves on to the next game
 - [ ] Swipe on Discover: right to show interest, left to skip a game
 - [ ] More information per game: screenshots, gameplay, genre, platform, PEGI rating, playtime
 - [ ] My Games collection: favourites, want to play, playing now, finished

@@ -27,8 +27,8 @@ personal and more fun.
 ## What am I going to build? (roadmap)
 
 - [x] Discover screen: one game at a time, with Skip and Like buttons
-- [x] My Games screen: list of games
-- [ ] Make Like and Skip work properly: Like saves the game to My Games, Skip hides it from Discover
+- [x] My Games screen: the games you liked
+- [x] Like and Skip work: Like adds the game to My Games, Skip moves on to the next game
 - [ ] Swipe on Discover: right to show interest, left to skip a game
 - [ ] More information per game: screenshots, gameplay, genre, platform, PEGI rating, playtime
 - [ ] My Games collection: favourites, want to play, playing now, finished
