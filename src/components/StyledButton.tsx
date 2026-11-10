@@ -31,7 +31,7 @@ export function StyledButton({
       ]}
       testID={testID}
     >
-      {isLoading ? <Spinner size="small" /> : <Text weight="bold" color={variant === 'primary' ? '#FFFFFF' : colors.ink}>{label}</Text>}
+      {isLoading ? <Spinner size="small" /> : <Text weight="bold" color={variant === 'primary' ? colors.surface : colors.ink}>{label}</Text>}
     </Pressable>
   );
 }
