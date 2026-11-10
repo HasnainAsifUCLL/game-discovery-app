@@ -11,7 +11,7 @@ export default function Root({ children }: PropsWithChildren) {
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
         <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#111827" />
+        <meta name="theme-color" content="#7256c9" />
         <ScrollViewStyleReset />
         <script
           dangerouslySetInnerHTML={{

@@ -1,13 +1,13 @@
 {
   "name": "Game Discovery",
   "short_name": "GameDiscover",
-  "description": "Discover games you'll love. Discover games that fit your taste and your free time.",
+  "description": "Discover games that fit your taste and your free time.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#ffffff",
-  "theme_color": "#111827",
+  "background_color": "#faf9f6",
+  "theme_color": "#7256c9",
   "icons": [
     { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
     { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png" }
