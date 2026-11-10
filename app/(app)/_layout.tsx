@@ -1,11 +1,11 @@
-import { Platform } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import { Tabs } from 'expo-router';
 import { TabIcon } from '../../src/components/TabIcon';
 import { colors } from '../../src/theme';
 
-// On the web, Netlify's free plan shows a "Powered by Netlify" badge in the bottom right corner.
-// Lift the tab bar so the badge does not cover the My Games tab.
-const badgeOffset = Platform.OS === 'web' ? 64 : 0;
+// Floating dock. On the web, Netlify's free plan shows a "Powered by Netlify" badge in the
+// bottom right corner, so the dock floats a bit higher there to stay clear of it.
+const dockBottom = Platform.OS === 'web' ? 64 : 12;
 
 export default function AppLayout() {
   // Uncomment when you implement Supabase authentication:
@@ -20,11 +20,9 @@ export default function AppLayout() {
         headerTintColor: colors.ink,
         tabBarActiveTintColor: colors.purple,
         tabBarInactiveTintColor: colors.muted,
-        tabBarStyle: {
-          backgroundColor: colors.surface,
-          borderTopColor: colors.line,
-          marginBottom: badgeOffset,
-        },
+        tabBarStyle: styles.dock,
+        tabBarItemStyle: styles.item,
+        tabBarLabelStyle: styles.label,
       }}
     >
       <Tabs.Screen
@@ -45,3 +43,25 @@ export default function AppLayout() {
     </Tabs>
   );
 }
+
+const styles = StyleSheet.create({
+  dock: {
+    marginHorizontal: 16,
+    marginBottom: dockBottom,
+    height: 68,
+    paddingTop: 8,
+    paddingBottom: 8,
+    borderRadius: 28,
+    borderTopWidth: 0,
+    borderWidth: 1,
+    borderColor: colors.line,
+    backgroundColor: colors.surface,
+    shadowColor: '#3c2b58',
+    shadowOpacity: 0.15,
+    shadowRadius: 16,
+    shadowOffset: { width: 0, height: 8 },
+    elevation: 8,
+  },
+  item: { borderRadius: 20 },
+  label: { fontSize: 11, fontWeight: '700' },
+});
