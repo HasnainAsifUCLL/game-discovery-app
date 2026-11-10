@@ -22,7 +22,13 @@ export function StyledButton({
     <Pressable
       onPress={onPress}
       disabled={isLoading}
-      style={[styles.base, styles[variant], isLoading && styles.disabled]}
+      accessibilityRole="button"
+      style={({ pressed }) => [
+        styles.base,
+        styles[variant],
+        isLoading && styles.disabled,
+        pressed && styles.pressed,
+      ]}
       testID={testID}
     >
       {isLoading ? <Spinner size="small" /> : <Text weight="bold" color={variant === 'primary' ? '#FFFFFF' : colors.ink}>{label}</Text>}
@@ -40,5 +46,6 @@ const styles = StyleSheet.create({
   },
   primary: { backgroundColor: colors.purple },
   secondary: { backgroundColor: colors.surface, borderWidth: 1, borderColor: colors.line },
-  disabled: {},
+  disabled: { opacity: 0.6 },
+  pressed: { opacity: 0.85 },
 });

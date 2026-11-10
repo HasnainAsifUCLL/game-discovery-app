@@ -1,6 +1,6 @@
 export const colors = {
   ink: '#242230',
-  muted: '#777382',
+  muted: '#6b6777',
   purple: '#7256c9',
   purpleSoft: '#eee8ff',
   coral: '#ef765f',
