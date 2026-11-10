@@ -1,5 +1,4 @@
 import { Tabs } from 'expo-router';
-import { Icon } from '../../src/components/primitives/Icon';
 import { colors } from '../../src/theme';
 
 export default function AppLayout() {
@@ -22,14 +21,12 @@ export default function AppLayout() {
         name="index"
         options={{
           title: 'Discover',
-          tabBarIcon: ({ color, size }) => <Icon name="compass-outline" size={size} color={color} />,
         }}
       />
       <Tabs.Screen
         name="my-games"
         options={{
           title: 'My Games',
-          tabBarIcon: ({ color, size }) => <Icon name="albums-outline" size={size} color={color} />,
         }}
       />
       <Tabs.Screen name="details/[id]" options={{ href: null }} />
