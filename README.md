@@ -24,7 +24,7 @@
     <br />
     <a href="https://github.com/HasnainAsifUCLL/game-discovery-app"><strong>View the repo »</strong></a>
     &middot;
-    <a href="https://games-discovery.netlify.app"><strong>Live PWA »</strong></a>
+    <a href="https://game-discovery-app-theta.vercel.app"><strong>Live PWA »</strong></a>
   </p>
 </div>
 
@@ -63,7 +63,7 @@
 **Game Discovery** is a Progressive Web App (PWA) built for the *Mobile Applications* course at UCLL (first assignment).
 It helps gamers discover new videogames that match their interests, one game at a time, and is meant to grow into a platform that also connects gamers with a similar taste.
 
-**Public link (live PWA):** https://games-discovery.netlify.app
+**Public link (live PWA):** https://game-discovery-app-theta.vercel.app
 
 Screens:
 
@@ -92,7 +92,7 @@ Both screens are reachable through the tab bar at the bottom.
 * [![TypeScript][TypeScript-badge]][TypeScript-url]
 * [![Expo Router][ExpoRouter-badge]][ExpoRouter-url]
 * [![Supabase][Supabase-badge]][Supabase-url]
-* [![Netlify][Netlify-badge]][Netlify-url]
+* [![Vercel][Vercel-badge]][Vercel-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -148,7 +148,7 @@ npx expo export -p web
 ```
 The output is written to `dist/`.
 
-**Deployment:** the PWA is hosted on Netlify (build command `npx expo export -p web`, publish directory `dist`) and is available at https://games-discovery.netlify.app.
+**Deployment:** the PWA is hosted on Vercel (build command `npx expo export -p web`, output directory `dist`) and is available at https://game-discovery-app-theta.vercel.app.
 
 **Install it as an app:** open the live link on a phone (Chrome) and choose *Add to Home Screen* (or *Install app*).
 
@@ -245,5 +245,5 @@ Project Link: [https://github.com/HasnainAsifUCLL/game-discovery-app](https://gi
 [ExpoRouter-url]: https://docs.expo.dev/router/introduction/
 [Supabase-badge]: https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white
 [Supabase-url]: https://supabase.com/
-[Netlify-badge]: https://img.shields.io/badge/Netlify-00C7B7?style=for-the-badge&logo=netlify&logoColor=white
-[Netlify-url]: https://www.netlify.com/
+[Vercel-badge]: https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white
+[Vercel-url]: https://vercel.com/
