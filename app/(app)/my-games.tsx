@@ -1,24 +1,14 @@
-import { useEffect, useState } from 'react';
 import { Stack as RouterStack } from 'expo-router';
 import { Screen } from '../../src/components/primitives/Screen';
 import { Stack } from '../../src/components/primitives/Stack';
 import { Text } from '../../src/components/primitives/Text';
 import { EmptyState } from '../../src/components/primitives/EmptyState';
 import { GameCard } from '../../src/components/GameCard';
-import { getMyGames } from '../../src/services/gameService';
-import { Game } from '../../src/types/game';
+import { useGameStore } from '../../src/state/useGameStore';
 import { colors } from '../../src/theme';
 
 export default function MyGamesScreen() {
-  const [games, setGames] = useState<Game[]>([]);
-
-  useEffect(() => {
-    async function load() {
-      const result = await getMyGames();
-      setGames(result);
-    }
-    load();
-  }, []);
+  const games = useGameStore((state) => state.likedGames);
 
   return (
     <Screen padding="lg">

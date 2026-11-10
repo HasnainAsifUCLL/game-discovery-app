@@ -13,6 +13,7 @@ import { GameCard } from '../../src/components/GameCard';
 import { getDiscoverGames } from '../../src/services/gameService';
 import { Game } from '../../src/types/game';
 import { checkDatabase } from '../../src/services/databaseService';
+import { useGameStore } from '../../src/state/useGameStore';
 import { colors } from '../../src/theme';
 
 export default function DiscoverScreen() {
@@ -21,6 +22,9 @@ export default function DiscoverScreen() {
   const [dbStatus, setDbStatus] = useState<'checking' | 'online' | 'offline'>('checking');
   const [loadStatus, setLoadStatus] = useState<'loading' | 'ready' | 'error'>('loading');
   const [reloadKey, setReloadKey] = useState<number>(0);
+  const [notice, setNotice] = useState<string>('');
+  const likeGame = useGameStore((state) => state.likeGame);
+  const likedGames = useGameStore((state) => state.likedGames);
 
   useEffect(() => {
     async function load() {
@@ -44,9 +48,27 @@ export default function DiscoverScreen() {
     check();
   }, []);
 
-  const game = games[index];
-  function nextGame() {
+  // Games you already liked are not shown again on Discover.
+  const available = games.filter((item) => !likedGames.some((liked) => liked.id === item.id));
+  const game = available[index];
+
+  function skipGame() {
+    setNotice('');
     setIndex(index + 1);
+  }
+
+  function likeCurrentGame() {
+    if (game === undefined) {
+      return;
+    }
+    // The liked game leaves the list, so the same index now points to the next game.
+    likeGame(game);
+    setNotice(`Added to My Games: ${game.title}`);
+  }
+
+  function startOver() {
+    setNotice('');
+    setIndex(0);
   }
 
   return (
@@ -65,6 +87,7 @@ export default function DiscoverScreen() {
           label={`Database: ${dbStatus}`}
           variant={dbStatus === 'online' ? 'success' : dbStatus === 'offline' ? 'error' : 'default'}
         />
+        {notice !== '' && <Badge label={notice} variant="success" />}
 
         {loadStatus === 'loading' ? (
           <Spinner size="large" color={colors.purple} />
@@ -77,18 +100,26 @@ export default function DiscoverScreen() {
         ) : game === undefined ? (
           <EmptyState
             title="No more games"
-            description="Come back later for new recommendations."
+            description={
+              available.length > 0
+                ? 'You skipped the rest. Start over to see them again.'
+                : 'You liked every game. Check them in My Games.'
+            }
+            action={
+              available.length > 0 ? (
+                <StyledButton label="Start over" variant="secondary" onPress={startOver} />
+              ) : undefined
+            }
           />
         ) : (
           <>
             <GameCard game={game} />
             <Row gap="md">
               <View style={styles.flex}>
-                <StyledButton label="Skip" variant="secondary" onPress={nextGame} />
+                <StyledButton label="Skip" variant="secondary" onPress={skipGame} />
               </View>
-              {/* Later: save the game to My Games */}
               <View style={styles.flex}>
-                <StyledButton label="Like" onPress={nextGame} />
+                <StyledButton label="Like" onPress={likeCurrentGame} />
               </View>
             </Row>
           </>
