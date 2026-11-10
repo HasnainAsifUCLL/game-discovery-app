@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Stack as RouterStack, useRouter } from 'expo-router';
+import { Stack as RouterStack } from 'expo-router';
 import { Screen } from '../../src/components/primitives/Screen';
 import { Stack } from '../../src/components/primitives/Stack';
 import { Row } from '../../src/components/primitives/Row';
 import { Text } from '../../src/components/primitives/Text';
 import { Badge } from '../../src/components/primitives/Badge';
+import { Spinner } from '../../src/components/primitives/Spinner';
 import { EmptyState } from '../../src/components/primitives/EmptyState';
 import { StyledButton } from '../../src/components/StyledButton';
 import { GameCard } from '../../src/components/GameCard';
@@ -15,18 +16,25 @@ import { checkDatabase } from '../../src/services/databaseService';
 import { colors } from '../../src/theme';
 
 export default function DiscoverScreen() {
-  const router = useRouter();
   const [games, setGames] = useState<Game[]>([]);
   const [index, setIndex] = useState<number>(0);
   const [dbStatus, setDbStatus] = useState<'checking' | 'online' | 'offline'>('checking');
+  const [loadStatus, setLoadStatus] = useState<'loading' | 'ready' | 'error'>('loading');
+  const [reloadKey, setReloadKey] = useState<number>(0);
 
   useEffect(() => {
     async function load() {
-      const result = await getDiscoverGames();
-      setGames(result);
+      setLoadStatus('loading');
+      try {
+        const result = await getDiscoverGames();
+        setGames(result);
+        setLoadStatus('ready');
+      } catch {
+        setLoadStatus('error');
+      }
     }
     load();
-  }, []);
+  }, [reloadKey]);
 
   useEffect(() => {
     async function check() {
@@ -58,7 +66,15 @@ export default function DiscoverScreen() {
           variant={dbStatus === 'online' ? 'success' : dbStatus === 'offline' ? 'error' : 'default'}
         />
 
-        {game === undefined ? (
+        {loadStatus === 'loading' ? (
+          <Spinner size="large" color={colors.purple} />
+        ) : loadStatus === 'error' ? (
+          <EmptyState
+            title="Could not load games"
+            description="Check your connection and try again."
+            action={<StyledButton label="Try again" onPress={() => setReloadKey(reloadKey + 1)} />}
+          />
+        ) : game === undefined ? (
           <EmptyState
             title="No more games"
             description="Come back later for new recommendations."
@@ -77,12 +93,6 @@ export default function DiscoverScreen() {
             </Row>
           </>
         )}
-
-        <StyledButton
-          label="My Games"
-          variant="secondary"
-          onPress={() => router.push('/my-games')}
-        />
       </Stack>
     </Screen>
   );
